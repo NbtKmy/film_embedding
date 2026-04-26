@@ -24,6 +24,7 @@ uv sync
 
 ## Running the demo (with pre-built data)
 
+Link to the data archive is [here](https://drive.google.com/drive/folders/1kopMyxjl-eHg5FVPIfRbgfJGBeNIuYq3?usp=sharing)
 If you received the data archive (video files, thumbnails, and vector database), extract it into the project root. You should end up with:
 
 ```

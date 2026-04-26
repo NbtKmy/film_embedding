@@ -96,6 +96,8 @@ uv run python ingest.py --step embed \
 uv run python main.py "a scene where someone eats a plant"
 ```
 
+To try the GUI (Streamlit), see [INSTALL.md](INSTALL.md).
+
 ## Project Structure
 
 ```

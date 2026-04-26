@@ -39,7 +39,7 @@ def load_all_scenes() -> list[dict]:
         with_payload=True,
         with_vectors=False,
     )
-    scenes = [r.payload for r in records]
+    scenes: list[dict] = [r.payload for r in records if r.payload is not None]
     return sorted(scenes, key=lambda s: (s.get("film_title", ""), s.get("scene_number", 0)))
 
 
@@ -71,7 +71,7 @@ def semantic_search(query: str, filters: dict, top_k: int = 20) -> list[dict]:
         query_filter=query_filter,
     ).points
 
-    return [{"score": h.score, **h.payload} for h in hits]
+    return [{"score": h.score, **(h.payload or {})} for h in hits]
 
 
 def apply_filters(scenes: list[dict], filters: dict) -> list[dict]:
@@ -175,7 +175,7 @@ def main():
 
         film_options = sorted({s.get("film_title", "") for s in all_scenes} - {""})
         director_options = sorted({s.get("film_director", "") for s in all_scenes} - {""})
-        year_options = sorted({s.get("film_year") for s in all_scenes if s.get("film_year")})
+        year_options = sorted({s.get("film_year") for s in all_scenes if s.get("film_year") is not None})
 
         selected_films = st.multiselect("Film", film_options)
         selected_directors = st.multiselect("Director", director_options)
